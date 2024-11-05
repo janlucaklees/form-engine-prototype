@@ -1,0 +1,17 @@
+{
+  "name": "form-engine",
+  "version": "0.0.0",
+  "description": "Build complex forms with ease. User form-engine!",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jan-Luca Klees",
+  "license": "WTFPL",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
