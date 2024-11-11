@@ -1,11 +1,11 @@
 import { reactive, computed } from "vue";
-import FieldDefinition from "./FieldDefinition";
+import AbstractField from "./field-definitions/AbstractField";
 
 export default class Form {
   private state = reactive({});
-  private fieldDefinitions = new Map<string, FieldDefinition>();
+  private fieldDefinitions = new Map<string, AbstractField>();
 
-  public registerField(fieldName: string, fieldDefinition: FieldDefinition) {
+  public registerField(fieldName: string, fieldDefinition: AbstractField) {
     // TODO: Assert that the field name is unique.
 
     this.fieldDefinitions.set(fieldName, fieldDefinition);
@@ -25,7 +25,7 @@ export default class Form {
     this.state[fieldName] = fieldState;
   }
 
-  public useState(fieldName: string) {
+  public useFieldState(fieldName: string) {
     return computed(() => this.state[fieldName]);
   }
 }

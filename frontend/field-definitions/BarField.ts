@@ -1,11 +1,11 @@
-import { FieldDefinition, type FieldState } from "form-engine";
+import { AbstractField, type BaseFieldState } from "form-engine";
 
-export default class BarField extends FieldDefinition {
+export default class BarField extends AbstractField {
   public override handleInput(
     nextValue: string,
     rootState: object,
-  ): FieldState {
-    const state: FieldState = {
+  ): BaseFieldState {
+    const state: BaseFieldState = {
       value: nextValue,
       isDisabled: false,
     };
