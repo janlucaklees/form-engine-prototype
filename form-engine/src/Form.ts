@@ -1,28 +1,31 @@
 import { reactive, computed } from "vue";
-import AbstractField from "./field-definitions/AbstractField";
+import BaseFieldDefinition, {
+  BaseFieldDefinitionConstructor,
+} from "./fields/BaseFieldDefinition";
 
 export default class Form {
   private state = reactive({});
-  private fieldDefinitions = new Map<string, AbstractField>();
+  private fieldDefinitions = new Map<string, BaseFieldDefinition>();
 
-  public registerField(fieldName: string, fieldDefinition: AbstractField) {
-    // TODO: Assert that the field name is unique.
+  public registerField(
+    fieldName: string,
+    fieldDefinitionClass: BaseFieldDefinitionConstructor,
+  ) {
+    console.assert(!this.fieldDefinitions.has(fieldName));
+
+    const fieldDefinition = new fieldDefinitionClass(this.state);
 
     this.fieldDefinitions.set(fieldName, fieldDefinition);
 
-    this.state[fieldName] = {
-      value: "",
-    };
+    this.state[fieldName] = fieldDefinition.getReactiveState();
   }
 
   public handleInput(fieldName: string, nextValue: string) {
     console.assert(this.fieldDefinitions.has(fieldName));
 
-    const fieldState = this.fieldDefinitions
+    this.state[fieldName].value = this.fieldDefinitions
       .get(fieldName)!
-      .handleInput(nextValue, this.state);
-
-    this.state[fieldName] = fieldState;
+      .handleInput(nextValue);
   }
 
   public useFieldState(fieldName: string) {

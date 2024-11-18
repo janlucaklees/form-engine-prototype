@@ -19,7 +19,7 @@
                         <Input
                             label="My first Input"
                             name="change-value"
-                            :fieldDefinition="new TextField()"
+                            :fieldDefinition="TextField"
                         />
                     </Form>
                 </div>
@@ -46,12 +46,12 @@
                         <Input
                             label="Type 'foo'"
                             name="foo"
-                            :fieldDefinition="new TextField()"
+                            :fieldDefinition="TextField"
                         />
                         <Input
-                            label="I hide on 'foo'"
+                            label="I disable on 'foo'"
                             name="bar"
-                            :fieldDefinition="new BarField()"
+                            :fieldDefinition="BarField"
                         />
                     </Form>
                 </div>
@@ -63,6 +63,6 @@
 <script setup>
 import { Form, Input } from "form-engine";
 
-import TextField from "~/field-definitions/TextField.ts";
-import BarField from "~/field-definitions/BarField.ts";
+import TextField from "~/fields/TextField.ts";
+import BarField from "~/fields/BarField.ts";
 </script>
