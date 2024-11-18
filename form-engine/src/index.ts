@@ -1,6 +1,6 @@
 import Form from "./components/Form.vue";
 import Input from "./components/Input.vue";
-import FieldDefinition from "./FieldDefinition";
-import type FieldState from "./FieldState";
+import AbstractField from "./field-definitions/AbstractField";
+import type BaseFieldState from "./BaseFieldState";
 
-export { Form, Input, FieldDefinition, type FieldState };
+export { Form, Input, AbstractField, type BaseFieldState };

@@ -1,3 +1,3 @@
-import { FieldDefinition } from "form-engine";
+import { AbstractField } from "form-engine";
 
-export default class TextField extends FieldDefinition {}
+export default class TextField extends AbstractField {}

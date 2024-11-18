@@ -18,5 +18,5 @@ const props = defineProps(["label", "name", "fieldDefinition"]);
 const form = inject("form");
 form.registerField(props.name, props.fieldDefinition);
 
-const state = form.useState(props.name);
+const state = form.useFieldState(props.name);
 </script>
