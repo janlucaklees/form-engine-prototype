@@ -14,7 +14,7 @@ export default class BaseFieldDefinition {
     };
   }
 
-  private isDisasbled(): boolean {
+  protected isDisasbled(): boolean | ComputedRef<boolean> {
     return false;
   }
 }
