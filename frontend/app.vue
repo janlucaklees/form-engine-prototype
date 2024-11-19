@@ -142,12 +142,33 @@
                     </Form>
                 </div>
             </section>
+
+            <section class="card mb-5">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">How about a list?</h5>
+
+                    <Form>
+                        <List name="list" label="List">
+                            <Input
+                                label="Type 'foo'"
+                                name="foo"
+                                :fieldDefinition="TextField"
+                            />
+                            <Input
+                                label="I disable on 'foo'"
+                                name="bar"
+                                :fieldDefinition="BarField"
+                            />
+                        </List>
+                    </Form>
+                </div>
+            </section>
         </main>
     </div>
 </template>
 
 <script setup>
-import { Form, Group, Input } from "form-engine";
+import { Form, Group, List, Input } from "form-engine";
 
 import TextField from "~/fields/TextField.ts";
 import BarField from "~/fields/BarField.ts";
