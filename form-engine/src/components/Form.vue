@@ -5,9 +5,9 @@
 </template>
 
 <script setup>
-import Form from "../Form";
+import Node from "../core/Node";
 
-const form = new Form();
+const form = new Node();
 
 provide("form", form);
 </script>

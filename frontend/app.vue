@@ -25,18 +25,7 @@
                 </div>
             </section>
 
-            <!-- <section class="card">
-                <div class="card-body">
-                    <h5 class="card-title mb-4">Can we integrate Selects?</h5>
-
-                    <Form>
-                        <Input label="My first Input" name="change-value" />
-                        <Input label="My first Input" name="change-value" />
-                    </Form>
-                </div>
-            </section> -->
-
-            <section class="card">
+            <section class="card mb-5">
                 <div class="card-body">
                     <h5 class="card-title mb-4">
                         Now let's hide another field depending on the input
@@ -56,13 +45,112 @@
                     </Form>
                 </div>
             </section>
+
+            <section class="card mb-5">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">
+                        Now let's do it in a group, so we can have multiple
+                        fields with the same name
+                    </h5>
+
+                    <Form>
+                        <Group name="first-group" label="First Group">
+                            <div class="border rounded p-3 mb-3">
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <Input
+                                            label="Type 'foo'"
+                                            name="foo"
+                                            :fieldDefinition="TextField"
+                                        />
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <Input
+                                            label="I disable on 'foo'"
+                                            name="bar"
+                                            :fieldDefinition="BarField"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </Group>
+                        <Group name="second-group" label="Second Group">
+                            <div class="border rounded p-3 mb-3">
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <Input
+                                            label="Type 'foo'"
+                                            name="foo"
+                                            :fieldDefinition="TextField"
+                                        />
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <Input
+                                            label="I disable on 'foo'"
+                                            name="bar"
+                                            :fieldDefinition="BarField"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </Group>
+                    </Form>
+                </div>
+            </section>
+
+            <section class="card mb-5">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">
+                        Disable a field that is inside a group, with the other
+                        field being outside the group
+                    </h5>
+
+                    <Form>
+                        <Input
+                            label="Type 'foo'"
+                            name="foo"
+                            :fieldDefinition="TextField"
+                        />
+                        <Group name="group" label="Group">
+                            <Input
+                                label="I disable on 'foo'"
+                                name="bar"
+                                :fieldDefinition="NestedBarField"
+                            />
+                        </Group>
+                    </Form>
+                </div>
+            </section>
+
+            <section class="card mb-5">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Now the other way around!</h5>
+
+                    <Form>
+                        <Group name="group" label="Group">
+                            <Input
+                                label="Type 'foo'"
+                                name="foo"
+                                :fieldDefinition="TextField"
+                            />
+                        </Group>
+                        <Input
+                            label="I disable on 'foo'"
+                            name="bar"
+                            :fieldDefinition="BarFieldNested"
+                        />
+                    </Form>
+                </div>
+            </section>
         </main>
     </div>
 </template>
 
 <script setup>
-import { Form, Input } from "form-engine";
+import { Form, Group, Input } from "form-engine";
 
 import TextField from "~/fields/TextField.ts";
 import BarField from "~/fields/BarField.ts";
+import NestedBarField from "~/fields/NestedBarField.ts";
+import BarFieldNested from "~/fields/BarFieldNested.ts";
 </script>
