@@ -8,7 +8,14 @@ export default class Node {
   private childNodes = new Map<string, Node>();
   private fieldDefinitions = new Map<string, BaseFieldDefinition>();
 
-  constructor(private readonly parentNode: Node | undefined) {}
+  constructor(
+    private readonly name: string | undefined,
+    private readonly parentNode: Node | undefined,
+  ) {}
+
+  public getName() {
+    return this.name;
+  }
 
   public getRootNode() {
     if (!this.parentNode) {

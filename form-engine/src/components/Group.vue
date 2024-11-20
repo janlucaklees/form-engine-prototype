@@ -16,7 +16,7 @@ const props = defineProps(["label", "name"]);
 // Get the form object form the context.
 const form = inject("form");
 
-const group = new Node(form);
+const group = new Node(props.name, form);
 form.registerChildNode(props.name, group);
 
 provide("form", group);
