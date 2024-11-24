@@ -25,7 +25,11 @@ export default class Node {
     return this.parentNode.getRootNode();
   }
 
-  public getParentNode() {
+  public hasParentNode(): this is { getParentNode: Node } {
+    return !!this.parentNode;
+  }
+
+  public getParentNode(): Node | undefined {
     return this.parentNode;
   }
 
@@ -33,10 +37,11 @@ export default class Node {
     this.childNodes.set(childName, childNode);
   }
 
-  public getChildNode(childName: string) {
-    console.assert(this.childNodes.has(childName));
+  public hasChildNode(childName: string) {
+    return this.childNodes.has(childName);
+  }
 
-    // TODO: Wrap in read-only proxy.
+  public getChildNode(childName: string) {
     return this.childNodes.get(childName);
   }
 

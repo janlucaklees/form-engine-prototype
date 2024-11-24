@@ -149,17 +149,37 @@
 
                     <Form>
                         <List name="list" label="List">
-                            <Input
-                                label="Type 'foo'"
-                                name="foo"
-                                :fieldDefinition="TextField"
-                            />
-                            <Input
-                                label="I disable on 'foo'"
-                                name="bar"
-                                :fieldDefinition="BarField"
-                            />
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <Input
+                                        label="Type 'foo'"
+                                        name="foo"
+                                        :fieldDefinition="TextField"
+                                    />
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <Input
+                                        label="I disable on 'foo'"
+                                        name="bar"
+                                        :fieldDefinition="BarField"
+                                    />
+                                </div>
+                                <div class="col-12 col-md-2">
+                                    <ListButton action="insert" label="Add" />
+                                </div>
+                                <div class="col-12 col-md-2">
+                                    <ListButton
+                                        action="delete"
+                                        label="Remove"
+                                    />
+                                </div>
+                            </div>
                         </List>
+                        <ListButton
+                            action="append"
+                            label="Append"
+                            target="list"
+                        />
                     </Form>
                 </div>
             </section>
@@ -168,7 +188,7 @@
 </template>
 
 <script setup>
-import { Form, Group, List, Input } from "form-engine";
+import { Form, Group, List, ListButton, Input } from "form-engine";
 
 import TextField from "~/fields/TextField.ts";
 import BarField from "~/fields/BarField.ts";

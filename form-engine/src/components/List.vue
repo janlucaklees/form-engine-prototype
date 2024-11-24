@@ -4,7 +4,7 @@
             <h4>{{ label }}</h4>
         </header>
 
-        <template v-for="index in [0, 1, 2]">
+        <template v-for="(item, index) in items" :key="item">
             <Group
                 :name="`${name}_${index}`"
                 :label="`${label} Child ${index + 1}`"
@@ -15,8 +15,8 @@
     </section>
 </template>
 
-<script setup>
-import Node from "../core/Node";
+<script setup lang="ts">
+import ListNode from "../core/ListNode";
 import Group from "./Group";
 
 const props = defineProps(["label", "name"]);
@@ -24,8 +24,10 @@ const props = defineProps(["label", "name"]);
 // Get the form object form the context.
 const form = inject("form");
 
-const list = new Node(props.name, form);
+const list = new ListNode(props.name, form);
 form.registerChildNode(props.name, list);
 
 provide("form", list);
+
+const items = list.useItems();
 </script>
