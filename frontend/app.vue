@@ -148,6 +148,11 @@
                     <h5 class="card-title mb-4">How about a list?</h5>
 
                     <Form>
+                        <ListButton
+                            action="prepend"
+                            label="Prepend Absolute Path"
+                            target="/list"
+                        />
                         <List name="list" label="List">
                             <div class="row">
                                 <div class="col-12 col-md-4">
@@ -164,11 +169,20 @@
                                         :fieldDefinition="BarField"
                                     />
                                 </div>
-                                <div class="col-12 col-md-2">
-                                    <ListButton action="insert" label="Add" />
-                                </div>
-                                <div class="col-12 col-md-2">
-                                    <ListButton
+                                <div class="col-12 col-md-2 d-flex flex-column">
+                                    <ListItemButton
+                                        action="insert-before"
+                                        label="Insert Before"
+                                    />
+                                    <ListItemButton
+                                        action="insert"
+                                        label="Insert After"
+                                    />
+                                    <ListItemButton
+                                        action="insert-after"
+                                        label="Insert After"
+                                    />
+                                    <ListItemButton
                                         action="delete"
                                         label="Remove"
                                     />
@@ -177,8 +191,8 @@
                         </List>
                         <ListButton
                             action="append"
-                            label="Append"
-                            target="list"
+                            label="Append Absolute Path"
+                            target="/list"
                         />
                     </Form>
                 </div>
@@ -188,7 +202,14 @@
 </template>
 
 <script setup>
-import { Form, Group, List, ListButton, Input } from "form-engine";
+import {
+    Form,
+    Group,
+    List,
+    ListButton,
+    ListItemButton,
+    Input,
+} from "form-engine";
 
 import TextField from "~/fields/TextField.ts";
 import BarField from "~/fields/BarField.ts";

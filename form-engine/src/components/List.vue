@@ -5,12 +5,13 @@
         </header>
 
         <template v-for="(item, index) in items" :key="item">
-            <Group
+            <ListItem
+                :uuid="item"
                 :name="`${name}_${index}`"
                 :label="`${label} Child ${index + 1}`"
             >
                 <slot />
-            </Group>
+            </ListItem>
         </template>
     </section>
 </template>
@@ -18,6 +19,7 @@
 <script setup lang="ts">
 import ListNode from "../core/ListNode";
 import Group from "./Group";
+import ListItem from "./List/ListItem";
 
 const props = defineProps(["label", "name"]);
 
@@ -28,6 +30,7 @@ const list = new ListNode(props.name, form);
 form.registerChildNode(props.name, list);
 
 provide("form", list);
+provide("list", list);
 
 const items = list.useItems();
 </script>

@@ -17,12 +17,37 @@ export default class Node {
     return this.name;
   }
 
+  public getPath() {
+    if (this.hasParentNode()) {
+      return `${this.getParentNode().getPath()}/${this.getName()}`;
+    } else {
+      return `/${this.getName()}`;
+    }
+  }
+
   public getRootNode() {
     if (!this.parentNode) {
       return this;
     }
 
     return this.parentNode.getRootNode();
+  }
+
+  public resolveNodeByPath(path: string) {
+    let node = this.getRootNode();
+
+    path
+      .split("/")
+      .filter((part) => !!part)
+      .forEach((part) => {
+        if (!node.hasChildNode(part)) {
+          throw new Error("nothjing found.");
+        }
+
+        node = node.getChildNode(part);
+      });
+
+    return node;
   }
 
   public hasParentNode(): this is { getParentNode: Node } {

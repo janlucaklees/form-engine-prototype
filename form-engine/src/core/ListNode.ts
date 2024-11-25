@@ -29,7 +29,37 @@ export default class ListNode extends Node {
     this.items.push(uuidv4());
   }
 
-  public delete() {
-    console.log("delete");
+  public prepend() {
+    this.items.unshift(uuidv4());
+  }
+
+  public insertAt(index: number) {
+    console.assert(0 <= index && index <= this.items.length);
+
+    this.items.splice(index, 0, uuidv4());
+  }
+
+  public insertBefore(uuid: string) {
+    console.assert(this.items.includes(uuid));
+
+    this.insertAt(this.items.indexOf(uuid));
+  }
+
+  public insertAfter(uuid: string) {
+    console.assert(this.items.includes(uuid));
+
+    this.insertAt(this.items.indexOf(uuid) + 1);
+  }
+
+  public deleteAt(index: number) {
+    console.assert(0 <= index && index < this.items.length);
+
+    this.items.splice(index, 1);
+  }
+
+  public delete(uuid: string) {
+    console.assert(this.items.includes(uuid));
+
+    this.deleteAt(this.items.indexOf(uuid));
   }
 }

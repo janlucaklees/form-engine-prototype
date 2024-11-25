@@ -6,44 +6,33 @@
 
 <script setup lang="ts">
 import { inject } from "vue";
-import Node from "../../core/Node";
 import ListNode from "../../core/ListNode";
 
-const props = defineProps(["label", "target", "action"]);
+const props = defineProps<{
+    label: string;
+    action: string;
+    target: string;
+}>();
 
-// Get the form object form the context.
-const parentNode: Node = inject("form");
-
-const list = findListNode();
+const form = inject("form");
 
 function handleClick() {
+    const list = getListNode();
+
     switch (props.action) {
-        default:
         case "append":
             list.append();
             break;
-        case "delete":
-            list.delete();
+        case "prepend":
+            list.prepend();
             break;
     }
 }
 
-function findListNode(): ListNode {
-    let listNode = parentNode;
+function getListNode() {
+    let listNode = form.resolveNodeByPath(props.target);
 
-    if (props.target && parentNode.hasChildNode(props.target)) {
-        listNode = parentNode.getChildNode(props.target);
-    }
-
-    while (
-        listNode &&
-        !(listNode instanceof ListNode) &&
-        (!props.target || listNode.getName() === props.target)
-    ) {
-        listNode = listNode.getParentNode();
-    }
-
-    if (!listNode) {
+    if (!listNode || !(listNode instanceof ListNode)) {
         throw new Error("Could not determine associated list!");
     }
 
