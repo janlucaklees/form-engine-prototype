@@ -11,7 +11,11 @@
 <script setup>
 import Node from "../core/Node";
 
-const props = defineProps(["label", "name"]);
+// Define props
+const props = defineProps({
+    label: { type: String, required: true },
+    name: { type: String, required: true },
+});
 
 // Get the form object form the context.
 const form = inject("form");
