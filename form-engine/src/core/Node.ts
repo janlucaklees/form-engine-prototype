@@ -21,7 +21,7 @@ export default class Node {
     if (this.hasParentNode()) {
       return `${this.getParentNode().getPath()}/${this.getName()}`;
     } else {
-      return `/${this.getName()}`;
+      return "/";
     }
   }
 
