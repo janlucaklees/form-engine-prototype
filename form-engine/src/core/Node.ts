@@ -9,7 +9,7 @@ export default class Node {
   private fieldDefinitions = new Map<string, BaseFieldDefinition>();
 
   constructor(
-    private readonly name: string | undefined,
+    private readonly name: string,
     private readonly parentNode: Node | undefined,
   ) {}
 

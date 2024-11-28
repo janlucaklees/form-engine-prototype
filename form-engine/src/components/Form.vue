@@ -9,7 +9,7 @@ import Node from "../core/Node";
 
 const props = defineProps(["name"]);
 
-const form = new Node();
+const form = new Node(props.name);
 
 provide("form", form);
 </script>

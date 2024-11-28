@@ -15,7 +15,7 @@
                         First let's make this Field change it's value
                     </h5>
 
-                    <Form>
+                    <Form name="form-1">
                         <Input
                             label="My first Input"
                             name="change-value"
@@ -31,7 +31,7 @@
                         Now let's hide another field depending on the input
                     </h5>
 
-                    <Form>
+                    <Form name="form-2">
                         <Input
                             label="Type 'foo'"
                             name="foo"
@@ -53,7 +53,7 @@
                         fields with the same name
                     </h5>
 
-                    <Form>
+                    <Form name="form-3">
                         <Group name="first-group" label="First Group">
                             <div class="border rounded p-3 mb-3">
                                 <div class="row">
@@ -105,7 +105,7 @@
                         field being outside the group
                     </h5>
 
-                    <Form>
+                    <Form name="form-4a">
                         <Input
                             label="Type 'foo'"
                             name="foo"
@@ -126,7 +126,7 @@
                 <div class="card-body">
                     <h5 class="card-title mb-4">Now the other way around!</h5>
 
-                    <Form>
+                    <Form name="form-4b">
                         <Group name="group" label="Group">
                             <Input
                                 label="Type 'foo'"
@@ -147,7 +147,7 @@
                 <div class="card-body">
                     <h5 class="card-title mb-4">How about a list?</h5>
 
-                    <Form>
+                    <Form name="form-5">
                         <ListButton
                             action="prepend"
                             label="Prepend Absolute Path"
