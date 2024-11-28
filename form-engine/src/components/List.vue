@@ -18,7 +18,6 @@
 
 <script setup lang="ts">
 import ListNode from "../core/ListNode";
-import Group from "./Group";
 import ListItem from "./List/ListItem";
 
 const props = defineProps(["label", "name"]);
