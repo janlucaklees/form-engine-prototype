@@ -17,6 +17,7 @@
         <div class="form-text">value: {{ data.state.value }}</div>
         <div class="form-text">hasFocus: {{ data.state.hasFocus }}</div>
         <div class="form-text">wasTouched: {{ data.state.wasTouched }}</div>
+        <div class="form-text">wasValid: {{ data.state.wasValid }}</div>
         <div class="form-text">
             showValidation: {{ data.state.showValidation }}
         </div>

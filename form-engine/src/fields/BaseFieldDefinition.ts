@@ -15,12 +15,23 @@ export default class BaseFieldDefinition {
       value: "",
       hasFocus: false,
       wasTouched: false,
+      wasValid: false,
+
       isDisabled: this.isDisasbled(),
       isValid: this.isValid(),
       isUserValid: this.isUserValid(),
       showValidation: this.showValidation(),
       validationMessages: this.getValidationMessages(),
     });
+
+    watch(
+      computed(() => this.state.isValid),
+      (newValue, oldValue) => {
+        if (newValue === false && oldValue === true) {
+          this.state.wasValid = true;
+        }
+      },
+    );
   }
 
   public useFieldState() {
@@ -76,7 +87,7 @@ export default class BaseFieldDefinition {
         return false;
       }
 
-      return this.state.wasTouched;
+      return this.state.wasTouched || this.state.wasValid;
     });
   }
 }

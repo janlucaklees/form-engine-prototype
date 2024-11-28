@@ -4,6 +4,7 @@ type BaseFieldStateStatic = {
   value: string;
   hasFocus: boolean;
   wasTouched: boolean;
+  wasValid: boolean;
   showValidation: boolean;
   isDisabled: boolean;
   isValid: boolean;
