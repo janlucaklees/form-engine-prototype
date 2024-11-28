@@ -17,11 +17,11 @@ const props = defineProps({
     name: { type: String, required: true },
 });
 
-// Get the form object form the context.
+// Add this group to the form tree.
 const form = inject("form");
-
 const group = new Node(props.name, form);
 form.registerChildNode(props.name, group);
 
+// Provide this Node as the form to all children.
 provide("form", group);
 </script>
