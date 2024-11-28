@@ -1,6 +1,6 @@
 import { type ComputedRef } from "vue";
 
-type BaseFieldStateStatic = {
+export type BaseFieldStateStatic = {
   value: string;
   hasFocus: boolean;
   wasTouched: boolean;

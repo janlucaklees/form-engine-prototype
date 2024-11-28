@@ -1,6 +1,6 @@
 <template>
     <component
-        :is="TextInput"
+        :is="fieldDefinition.getComponent()"
         :label="label"
         :state="data.state"
         @input="(event) => fieldDefinition.handleInput(event.target.value)"

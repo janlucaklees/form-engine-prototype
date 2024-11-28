@@ -1,10 +1,15 @@
 import { computed, type ComputedRef, reactive } from "vue";
 import type BaseFieldState from "./BaseFieldState.ts";
 import Node from "../core/Node";
+import TextInput from "../components/input-types/TextInput.vue";
 
 export default class BaseFieldDefinition {
   protected state: BaseFieldState;
   protected form?: Node;
+
+  public getComponent() {
+    return TextInput;
+  }
 
   public setFormNode(form: Node) {
     this.form = form;

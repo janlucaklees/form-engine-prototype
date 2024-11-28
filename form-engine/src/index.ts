@@ -5,6 +5,7 @@ import ListButton from "./components/List/ListButton.vue";
 import ListItemButton from "./components/List/ListItemButton.vue";
 import Input from "./components/Input.vue";
 import BaseFieldDefinition from "./fields/BaseFieldDefinition";
+import SelectFieldDefinition from "./fields/field-types/SelectFieldDefinition";
 import type BaseFieldState from "./fields/BaseFieldState";
 
 export {
@@ -15,5 +16,6 @@ export {
   ListItemButton,
   Input,
   BaseFieldDefinition,
+  SelectFieldDefinition,
   type BaseFieldState,
 };
