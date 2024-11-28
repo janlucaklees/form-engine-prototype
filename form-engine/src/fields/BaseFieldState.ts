@@ -1,3 +1,5 @@
+import { type ComputedRef } from "vue";
+
 type BaseFieldStateStatic = {
   value: string;
   isDisabled: boolean;
