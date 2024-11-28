@@ -12,6 +12,7 @@
   "dependencies": {
     "bootstrap": "^5.3.3",
     "nuxt": "^3.14.0",
+    "validate.js": "^0.13.1",
     "vue": "latest",
     "vue-router": "latest"
   },
