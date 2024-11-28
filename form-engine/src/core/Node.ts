@@ -2,6 +2,7 @@ import { reactive } from "vue";
 import BaseFieldDefinition, {
   BaseFieldDefinitionConstructor,
 } from "../fields/BaseFieldDefinition";
+import path from "path-browserify";
 
 export default class Node {
   private state = reactive({});
@@ -33,19 +34,20 @@ export default class Node {
     return this.parentNode.getRootNode();
   }
 
-  public resolveNodeByPath(path: string) {
-    let node = this.getRootNode();
-
-    path
+  public resolveNodeByPath(nodePath: string) {
+    const absolutePath = path.resolve(this.getPath(), nodePath);
+    const nodeNames = absolutePath
       .split("/")
-      .filter((part) => !!part)
-      .forEach((part) => {
-        if (!node.hasChildNode(part)) {
-          throw new Error("nothjing found.");
-        }
+      .filter((nodeName: string) => nodeName.length > 0);
 
-        node = node.getChildNode(part);
-      });
+    let node: Node = this.getRootNode();
+    for (const nodeName of nodeNames) {
+      if (!node.hasChildNode(nodeName)) {
+        return undefined;
+      }
+
+      node = node.getChildNode(nodeName);
+    }
 
     return node;
   }
@@ -97,5 +99,33 @@ export default class Node {
     console.assert(this.fieldDefinitions.has(childName));
 
     return this.state[childName];
+  }
+
+  public hasField(fieldName: string) {
+    return this.fieldDefinitions.has(fieldName);
+  }
+
+  public getField(fieldName: string): BaseFieldDefinition {
+    console.assert(this.fieldDefinitions.has(fieldName));
+
+    return this.fieldDefinitions.get(fieldName)!;
+  }
+
+  public resolveFieldByPath(fieldPath: string) {
+    // Make sure we have a path that actually ends with something that could be a filed name.
+    // e.g. not '/'
+    const fieldName = path.basename(fieldPath);
+    if (!fieldName) {
+      return undefined;
+    }
+
+    // Get the node that hosts the field.
+    const nodePath = path.dirname(fieldPath);
+    const node = this.resolveNodeByPath(nodePath);
+    if (!node || !node.hasField(fieldName)) {
+      return undefined;
+    }
+
+    return node.getField(fieldName);
   }
 }
