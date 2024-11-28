@@ -1,5 +1,5 @@
 <template>
-    <Group>
+    <Group :init="true">
         <slot />
     </Group>
 </template>

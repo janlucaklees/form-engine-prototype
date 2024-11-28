@@ -1,13 +1,12 @@
 import { reactive } from "vue";
-import BaseFieldDefinition, {
-  BaseFieldDefinitionConstructor,
-} from "../fields/BaseFieldDefinition";
+import BaseFieldDefinition from "../fields/BaseFieldDefinition";
 import path from "path-browserify";
 
 export default class Node {
   private state = reactive({});
   private childNodes = new Map<string, Node>();
   private fieldDefinitions = new Map<string, BaseFieldDefinition>();
+  private onMountedCallbacks = new Array<CallableFunction>();
 
   constructor(
     private readonly name: string,
@@ -74,31 +73,12 @@ export default class Node {
 
   public registerField(
     fieldName: string,
-    fieldDefinitionClass: BaseFieldDefinitionConstructor,
+    fieldDefinition: BaseFieldDefinition,
   ) {
     console.assert(!this.fieldDefinitions.has(fieldName));
 
-    console.log("registerField", fieldName);
-
-    const fieldDefinition = new fieldDefinitionClass(this.state, this);
-
+    fieldDefinition.setFormNode(this);
     this.fieldDefinitions.set(fieldName, fieldDefinition);
-
-    this.state[fieldName] = fieldDefinition.getReactiveState();
-  }
-
-  public handleInput(fieldName: string, nextValue: string) {
-    console.assert(this.fieldDefinitions.has(fieldName));
-
-    this.state[fieldName].value = this.fieldDefinitions
-      .get(fieldName)!
-      .handleInput(nextValue);
-  }
-
-  public useFieldState(childName: string) {
-    console.assert(this.fieldDefinitions.has(childName));
-
-    return this.state[childName];
   }
 
   public hasField(fieldName: string) {
@@ -127,5 +107,14 @@ export default class Node {
     }
 
     return node.getField(fieldName);
+  }
+
+  public callOnMountedHook() {
+    this.onMountedCallbacks.forEach((callbackfn) => callbackfn());
+    this.childNodes.forEach((childNode) => childNode.callOnMountedHook());
+  }
+
+  public onMounted(callback: CallableFunction) {
+    this.onMountedCallbacks.push(callback);
   }
 }

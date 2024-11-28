@@ -4,19 +4,26 @@
         <input
             type="text"
             class="form-control"
-            :value="state.value"
-            :disabled="state.isDisabled"
-            @input="(event) => form.handleInput(name, event.target.value)"
+            :value="data.state.value"
+            :disabled="data.state.isDisabled"
+            @input="(event) => fieldDefinition.handleInput(event.target.value)"
         />
-        <div class="form-text">The Fields value: {{ state.value }}</div>
+        <div class="form-text">The Fields value: {{ data.state.value }}</div>
     </div>
 </template>
 
 <script setup>
+import { reactive } from "vue";
 const props = defineProps(["label", "name", "fieldDefinition"]);
 
 const form = inject("form");
 form.registerField(props.name, props.fieldDefinition);
 
-const state = form.useFieldState(props.name);
+let data = reactive({
+    state: {},
+});
+form.onMounted(() => {
+    props.fieldDefinition.init();
+    data.state = props.fieldDefinition.useFieldState();
+});
 </script>

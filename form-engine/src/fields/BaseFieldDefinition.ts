@@ -1,30 +1,31 @@
-import { type ComputedRef } from "vue";
+import { type ComputedRef, reactive } from "vue";
 import type BaseFieldState from "./BaseFieldState.ts";
-import Form from "../core/Form";
+import Node from "../core/Node";
 
 export default class BaseFieldDefinition {
-  constructor(
-    protected readonly state: object,
-    protected readonly form: Form,
-  ) {}
+  protected state: BaseFieldState;
+  protected form?: Node;
 
-  public handleInput(nextValue: string) {
-    return nextValue;
+  public setFormNode(form: Node) {
+    this.form = form;
   }
 
-  public getReactiveState(): BaseFieldState {
-    return {
+  public init() {
+    this.state = reactive({
       value: "",
       isDisabled: this.isDisasbled(),
-    };
+    });
+  }
+
+  public useFieldState() {
+    return this.state;
+  }
+
+  public handleInput(nextValue: string) {
+    this.state.value = nextValue;
   }
 
   protected isDisasbled(): boolean | ComputedRef<boolean> {
     return false;
   }
 }
-
-export type BaseFieldDefinitionConstructor = new (
-  state: object,
-  form: Form,
-) => BaseFieldDefinition;

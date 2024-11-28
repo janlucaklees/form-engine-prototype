@@ -19,7 +19,7 @@
                         <Input
                             label="My first Input"
                             name="change-value"
-                            :fieldDefinition="TextField"
+                            :fieldDefinition="new BaseFieldDefinition()"
                         />
                     </Form>
                 </div>
@@ -35,12 +35,14 @@
                         <Input
                             label="Type 'foo'"
                             name="foo"
-                            :fieldDefinition="TextField"
+                            :fieldDefinition="new BaseFieldDefinition()"
                         />
                         <Input
                             label="I disable on 'foo'"
                             name="bar"
-                            :fieldDefinition="BarField"
+                            :fieldDefinition="
+                                new DisableOnFooFieldDefinition('/foo')
+                            "
                         />
                     </Form>
                 </div>
@@ -61,14 +63,20 @@
                                         <Input
                                             label="Type 'foo'"
                                             name="foo"
-                                            :fieldDefinition="TextField"
+                                            :fieldDefinition="
+                                                new BaseFieldDefinition()
+                                            "
                                         />
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <Input
                                             label="I disable on 'foo'"
                                             name="bar"
-                                            :fieldDefinition="BarField"
+                                            :fieldDefinition="
+                                                new DisableOnFooFieldDefinition(
+                                                    '/first-group/foo',
+                                                )
+                                            "
                                         />
                                     </div>
                                 </div>
@@ -81,14 +89,20 @@
                                         <Input
                                             label="Type 'foo'"
                                             name="foo"
-                                            :fieldDefinition="TextField"
+                                            :fieldDefinition="
+                                                new BaseFieldDefinition()
+                                            "
                                         />
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <Input
                                             label="I disable on 'foo'"
                                             name="bar"
-                                            :fieldDefinition="BarField"
+                                            :fieldDefinition="
+                                                new DisableOnFooFieldDefinition(
+                                                    '/second-group/foo',
+                                                )
+                                            "
                                         />
                                     </div>
                                 </div>
@@ -109,13 +123,15 @@
                         <Input
                             label="Type 'foo'"
                             name="foo"
-                            :fieldDefinition="TextField"
+                            :fieldDefinition="new BaseFieldDefinition()"
                         />
                         <Group name="group" label="Group">
                             <Input
                                 label="I disable on 'foo'"
                                 name="bar"
-                                :fieldDefinition="NestedBarField"
+                                :fieldDefinition="
+                                    new DisableOnFooFieldDefinition('/foo')
+                                "
                             />
                         </Group>
                     </Form>
@@ -131,13 +147,15 @@
                             <Input
                                 label="Type 'foo'"
                                 name="foo"
-                                :fieldDefinition="TextField"
+                                :fieldDefinition="new BaseFieldDefinition()"
                             />
                         </Group>
                         <Input
                             label="I disable on 'foo'"
                             name="bar"
-                            :fieldDefinition="BarFieldNested"
+                            :fieldDefinition="
+                                new DisableOnFooFieldDefinition('/group/foo')
+                            "
                         />
                     </Form>
                 </div>
@@ -159,14 +177,20 @@
                                     <Input
                                         label="Type 'foo'"
                                         name="foo"
-                                        :fieldDefinition="TextField"
+                                        :fieldDefinition="
+                                            new BaseFieldDefinition()
+                                        "
                                     />
                                 </div>
                                 <div class="col-12 col-md-4">
                                     <Input
                                         label="I disable on 'foo'"
                                         name="bar"
-                                        :fieldDefinition="BarField"
+                                        :fieldDefinition="
+                                            new DisableOnFooFieldDefinition(
+                                                './foo',
+                                            )
+                                        "
                                     />
                                 </div>
                                 <div class="col-12 col-md-2 d-flex flex-column">
@@ -208,11 +232,9 @@ import {
     List,
     ListButton,
     ListItemButton,
+    BaseFieldDefinition,
     Input,
 } from "form-engine";
 
-import TextField from "~/fields/TextField.ts";
-import BarField from "~/fields/BarField.ts";
-import NestedBarField from "~/fields/NestedBarField.ts";
-import BarFieldNested from "~/fields/BarFieldNested.ts";
+import DisableOnFooFieldDefinition from "~/fields/DisableOnFooFieldDefinition.ts";
 </script>

@@ -4,7 +4,7 @@
             <h4>{{ label }}</h4>
         </header>
 
-        <template v-for="(item, index) in items" :key="item">
+        <template v-for="(item, index) in data.items" :key="item">
             <ListItem
                 :uuid="item"
                 :name="`${name}_${index}`"
@@ -31,5 +31,10 @@ form.registerChildNode(props.name, list);
 provide("form", list);
 provide("list", list);
 
-const items = list.useItems();
+let data = reactive({
+    items: [],
+});
+form.onMounted(() => {
+    data.items = list.useItems();
+});
 </script>
